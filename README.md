@@ -103,6 +103,26 @@ int lcm(int a,int b)
 
 ------
 
+# STL知识补充
+
+## vector
+
+~~~c++
+vector<int> couple(100000,-1);//这样可以初始化vector为-1
+
+ vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
+vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest 数组
+
+
+~~~
+
+## set
+
+~~~c++
+set<int>::iterator sit=Singles.begin();
+printf("%d",*sit);//set的访问方式
+~~~
+
 
 
 # 编程语言知识补充
@@ -144,7 +164,7 @@ fill(first,last,val);
 
 **long long**是64位的 18446744073709551616无符号十进制下是 **20位**
 
-
+### II的优先级小于&&
 
 ### 输出格式控制
 
@@ -206,6 +226,12 @@ struct StudentList{
   ```
 
 - test for git 2
+
+- ~~~C++
+  scanf("%lld")//这么写codeblocks会报警但是没有问题
+  ~~~
+
+- a/b取得是商！a%b取得是余数 常常因为要取前面的数（商）写成 a%b
 
 
 
