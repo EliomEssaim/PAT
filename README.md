@@ -2,6 +2,8 @@
 
 
 
+
+
 # 英语词汇
 
 ## 单词
@@ -16,6 +18,8 @@
 ## 句子
 
 The quick brown fox jumps over the lazy dog.
+
+**significant digits**有效数字
 
 
 
@@ -113,7 +117,15 @@ vector<int> couple(100000,-1);//这样可以初始化vector为-1
  vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
 vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest 数组
 
-
+/*********分割线*****************/
+#include<vector>
+vector<int> vi;
+vi.pushback();
+vi.popback();
+vi.size();
+vi.clear();
+vi.insert(?,?);
+vi.erase(?,?)//单个元素写法 区间的写法
 ~~~
 
 ## set
@@ -121,6 +133,66 @@ vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest �
 ~~~c++
 set<int>::iterator sit=Singles.begin();
 printf("%d",*sit);//set的访问方式
+multiset<int> st;//只排序不去重
+/*********分割线*****************/
+#include<set>
+set<int>  st;
+st.insert(?);
+st.find();//返回值是什么？
+st.erase(?,?);//单个元素的两种方法 删除区间的一种方法
+st.size();
+st.clear();
+
+~~~
+
+## string
+
+~~~c++
+#include<string>//string忽略空格//string可以用下标访问吗？
+using namespace std;
+string str1,str2;
+str1+=str2;
+str2-=str1;//没有这种写法
+/*********分割线*****************/
+string str="asdfdfwq",str2;
+zeroPos=3;
+str2=str.substr(0,zeroPos);
+cout<<str2<<endl;//输出？                                                          asd
+/*********分割线*****************/
+//如何删除一个元素与一排元素？
+//如何插入多个元素？
+//默写：
+string str;
+str.insert(?,?);
+str.erase(?,?);//删除一个元素的两个写法 删除区间的两种写法
+str.substr(?,?);
+string::npos
+str.find(?);
+str.replace(?,?,?)//两种写法
+/*********分割线*****************/    
+getline(cin, str);//获得一行数据 使用之前要用 getchar();把\n吃掉！！！
+~~~
+
+## map
+
+~~~c++
+map<string, int> mp;
+~~~
+
+**int会被初始化为0！！**
+
+~~~C++
+/*********分割线*****************/  
+#include<map>
+using namespace std;
+map<char,int> mp;
+map<char,int>::iterator it=mp.begin();
+it.first=?;
+it.second=?;
+mp.find(?);
+mp.erase(?);//删除单个元素的两种方法？删除区间元素的一个方法
+mp.size();
+mp.clear();
 ~~~
 
 
@@ -147,6 +219,44 @@ memset(数组名,值,sizeof(数组格式));
 fill(first,last,val);
 //first为容器的首迭代器，last为容器的末迭代器，val为将要替换的值。
 ```
+
+### find函数
+
+~~~c++
+#include<algorithm>
+待查值的地址=find(数组的起始地址,数组的终止地址+1,待查找的值);
+~~~
+
+### stoi函数
+
+~~~c++
+#include<math.h>//用到了pow
+float stoi(string str)//将字符串转换为数字
+{
+    int ret=0,p=1;
+    int zeroPos=str.find('.');
+
+    if(zeroPos==string::npos)
+    {
+        for(int i=str.size()-1;i>=0;i--,p*=10)
+            ret+=(str[i]-'0')*p;
+        return (float)ret;
+    }
+    else
+    {
+        int leftNum=0,rightNum=0;
+        string left,right;
+        left=str.substr(0,zeroPos);
+        right=str.substr(zeroPos+1,str.size()-zeroPos-1);
+
+        for(int i=left.size()-1;i>=0;i--,p*=10)
+            leftNum+=(left[i]-'0')*p;
+        for(int i=right.size()-1,p=1;i>=0;i--,p*=10)
+            rightNum+=(right[i]-'0')*p;
+        return (float)leftNum+(float)rightNum/pow(10,right.size());
+    }
+}
+~~~
 
 
 
@@ -205,6 +315,29 @@ struct StudentList{
 }
 ```
 
+### 用c++求x的y次方的方法：
+
+~~~c++
+//方法一
+#include <math.h>
+pow(x, y);
+//方法二：
+#include <math.hpp>
+Power(x, y);
+~~~
+
+### 浮点数比较大小
+
+- eps最好取1e-8
+
+### 以某数字a(如2)为起点 以b(如3)为周期实现循环输出1、 2....b
+
+~~~c++
+(i-2+2*3)%3
+(i-a+b*a)%b//适用于b比a大的情况！
+ if (uid>=s && (uid-s)%n==0)
+~~~
+
 
 
 # 经典算法的实现
@@ -212,7 +345,11 @@ struct StudentList{
 ## 素数——埃氏筛法
 
 ```c++
-
+bool isprime(int a) {
+    for (int i = 2; i * i <= a; i++)
+        if(a % i == 0) return false;
+    return true;
+}
 ```
 
 
@@ -232,6 +369,35 @@ struct StudentList{
   ~~~
 
 - a/b取得是商！a%b取得是余数 常常因为要取前面的数（商）写成 a%b
+
+-  ~~~c++
+   A.insert(i,'0');//这么写是错误的，必须用双引号
+  A[0]!="0"//这么写不行 比较的时候必须用单引号
+  ~~~
+
+- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

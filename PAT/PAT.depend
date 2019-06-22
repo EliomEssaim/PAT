@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1561118972 source:f:\notes\pat\code\stringtraining.cpp
+	<iostream>
+	<cstdio>
+	<string>
+	<algorithm>
+
+1561174368 source:f:\notes\pat\code\a1060.cpp
+	<iostream>
+	<cstdio>
+	<string>
+	<math.h>
+
+1561188457 source:f:\notes\pat\code\maptraining.cpp
+	<iostream>
+	<cstdio>
+	<string>
+	<map>
+
+1561193000 source:f:\notes\pat\code\b1044.cpp
+	<iostream>
+	<cstdio>
+	<string>
+	<map>
+
+1561200025 source:f:\notes\pat\code\b1069.cpp
+	<iostream>
+	<map>
+	<cstdio>
+
