@@ -8,18 +8,16 @@
 
 ## 单词
 
-- word
-- happy
-- threshold
-- PAT
-- LCM
-- AVL
+- consecutive **连续**
+- utility**实用**
 
 ## 句子
 
 The quick brown fox jumps over the lazy dog.
 
 **significant digits**有效数字
+
+**not compatible** 不兼容
 
 
 
@@ -109,15 +107,20 @@ int lcm(int a,int b)
 
 # STL知识补充
 
-## vector
+## vector(可变长数组)
+
+- sort可用
 
 ~~~c++
 vector<int> couple(100000,-1);//这样可以初始化vector为-1
-
- vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
+vector<int> GoodsList(amount);//这个才是vector预分配空间
+vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
 vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest 数组
-
+ans[i].name.c_str()；//c_str()这样就可以用printf了
+v.push_back(node{s, score, -1, -1, 0});//如果vector是结构体可以这么写
+  
 /*********分割线*****************/
+//vector的访问方式有哪两种？
 #include<vector>
 vector<int> vi;
 vi.pushback();
@@ -125,16 +128,18 @@ vi.popback();
 vi.size();
 vi.clear();
 vi.insert(?,?);
-vi.erase(?,?)//单个元素写法 区间的写法
+vi.erase(?,?)//单个元素写法 区间的写法	
 ~~~
 
-## set
+## set(集合)
 
 ~~~c++
 set<int>::iterator sit=Singles.begin();
 printf("%d",*sit);//set的访问方式
 multiset<int> st;//只排序不去重
+ans[i].name.c_str()//c_str()这样就可以用printf了
 /*********分割线*****************/
+//set的访问方式？
 #include<set>
 set<int>  st;
 st.insert(?);
@@ -147,12 +152,15 @@ st.clear();
 
 ## string
 
+sort可用
+
 ~~~c++
 #include<string>//string忽略空格//string可以用下标访问吗？
 using namespace std;
-string str1,str2;
+string str1,str2[n];//n为变量 这种写法是允许的
 str1+=str2;
 str2-=str1;//没有这种写法
+ans[i].name.c_str()//c_str()这样就可以用printf了
 /*********分割线*****************/
 string str="asdfdfwq",str2;
 zeroPos=3;
@@ -161,6 +169,7 @@ cout<<str2<<endl;//输出？                                                    
 /*********分割线*****************/
 //如何删除一个元素与一排元素？
 //如何插入多个元素？
+//string的访问方式有哪两种？
 //默写：
 string str;
 str.insert(?,?);
@@ -173,15 +182,20 @@ str.replace(?,?,?)//两种写法
 getline(cin, str);//获得一行数据 使用之前要用 getchar();把\n吃掉！！！
 ~~~
 
-## map
+## map(映射)
 
 ~~~c++
 map<string, int> mp;
 ~~~
 
-**int会被初始化为0！！**
+- **int会被初始化为0！！**
+- map的会以键**从小到大**排序
+- unodered_map只映射**不排序**（#include <unordered_map>）**C++11**
+- 
 
 ~~~C++
+//map访问方式有哪两种？
+
 /*********分割线*****************/  
 #include<map>
 using namespace std;
@@ -193,9 +207,14 @@ mp.find(?);
 mp.erase(?);//删除单个元素的两种方法？删除区间元素的一个方法
 mp.size();
 mp.clear();
+/*********分割线*****************/
+map<int,vector<int> > unCompatible;
+unCompatible[gsA].push_back(gsB);//unCompatible[gsA]代表vector已经是vector类了！
 ~~~
 
-
+- //逆序输出map
+  for(map<int,int>::**reverse_iterator** it=**mp.rbegin()**;it!=**mp.rend()**;it++)
+          cout<<it->first<<" "<<it->second<<endl;
 
 # 编程语言知识补充
 
@@ -256,6 +275,13 @@ float stoi(string str)//将字符串转换为数字
         return (float)leftNum+(float)rightNum/pow(10,right.size());
     }
 }
+~~~
+
+### tolower和toupper函数
+
+~~~c++
+#include <cctype>
+//大小写转换
 ~~~
 
 
@@ -322,7 +348,7 @@ struct StudentList{
 #include <math.h>
 pow(x, y);
 //方法二：
-#include <math.hpp>
+#include <math.hpp	>
 Power(x, y);
 ~~~
 
@@ -362,8 +388,6 @@ bool isprime(int a) {
    return ((year%4==0)&&(year%100!=0))||(year%400==0)
   ```
 
-- test for git 2
-
 - ~~~C++
   scanf("%lld")//这么写codeblocks会报警但是没有问题
   ~~~
@@ -375,8 +399,9 @@ bool isprime(int a) {
   A[0]!="0"//这么写不行 比较的时候必须用单引号
   ~~~
 
-- 
-
+- int IsExist[100010]=**{0}**;忘记初始化
+- vector<int>  a**[b]**;不能使用中括号！！要使用小括号来预分配空间
+- "Yes"No"**大小写**不注意！这种情况下也会报错**答案错误**而不是格式错误。也会有**答案正确**，因为可能你Yes写对了 答案有全是Yes的
 
 
 
