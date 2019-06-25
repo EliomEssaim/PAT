@@ -216,6 +216,31 @@ unCompatible[gsA].push_back(gsB);//unCompatible[gsA]代表vector已经是vector�
   for(map<int,int>::**reverse_iterator** it=**mp.rbegin()**;it!=**mp.rend()**;it++)
           cout<<it->first<<" "<<it->second<<endl;
 
+## queue（队列）
+
+~~~C++
+#include<queue>
+using namespace std;
+queue<int> q;
+q.push(i);
+q.pop();//取出但不返回值
+q.front();
+q.back();//返回值但不取出
+q.empty();//使用pop和front之前必先使用empty判断是否为空
+q.size();
+~~~
+
+### priority_queue(优先队列)
+
+~~~C++
+#include<queue>
+using namespace std;
+priority_queue<int> q;
+
+~~~
+
+
+
 # 编程语言知识补充
 
 ## 函数类
