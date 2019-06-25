@@ -235,15 +235,83 @@ q.size();
 ~~~C++
 #include<queue>
 using namespace std;
-priority_queue<int> q;
-
+priority_queue<int> q;//没有front back
+q.size();
+q.top();//返回值但不取出
+q.push();
+q.pop();//取出但不返回值
+q.empty();//无论是优先队列还是
+priority_queue<int,vector<int>,less<int> >q;//less<int> 从顶向下变小如果是greater<int> 从顶向下变大
+/************结构体的优先队列**************/
+struct fruit{
+        string name;
+        int price;
+        friend bool operator < (fruit f1,fruit f2){
+            return f1.price<f2.price;
+        };
+    }f1,f2,f3;
+//.....
+priority_queue<fruit> fq;
+f1.name="桃子";
+f1.price=3;
+f2.name="梨子";
+f2.price=4;
+f3.name="苹果";
+f3.price=1;
+fq.push(f1);
+fq.push(f2);
+fq.push(f3);
+fq.top();//输出梨子 4；因为默认为less所以top是最大的，而struct里面定义价格小的比较小所以价格最大即优先级最大的
 ~~~
 
+## stack(堆栈)
 
+~~~C++
+#include<stack>
+using namespace std;
+stack<int> st;
+st.push();
+st.pop();
+st.top();
+st.empty();
+st.size();
+~~~
 
-# 编程语言知识补充
+## pair(对)
 
-## 函数类
+~~~C++
+/*
+相当于结构体
+struct pair{
+typename first;
+typename second;
+}
+*/
+#include<utility>//添加map会自动添加utility
+using namespace std;
+pair<string,int> p;
+pair<string,int> p1("haha",5);//初始化方法一
+p=make_pair("haha",5);//初始化方法二
+cout<< p.first << " " << p.second <<endl;//访问方式
+/* pair可以比较大小，但是先比较first才比较second*/
+//pair可以让map用insert函数而不是单单只能用迭代器和下标来访问
+mp.insert(make_pair("hahaa",5));
+mp.insert(pair<string,int>("haha",10));//类型名直接加小括号
+~~~
+
+## Algorithm头文件
+
+~~~C++
+max(x,y);min(x,y);abs(x);//操作对象都是整数abs如果想用浮点数要用math.h下的fabs()
+swap(x,y);
+reverse(it,it2);//左闭右开的将区间的迭代器进行反转，数组可用vector可用string可用
+next_permutation(a,a+3);//给出按字典序的下一个全排列如 123 132 213 231....最后会输出false
+//a是数组整型指针
+fill(a,a+5,3);//对指针范围内（左闭右开），进行赋值
+lower_bound(first,last,val);
+upper_bound(fitst,last,val);//在有序！！数组或者容器中查找第一个值大/小于等于val的元素的指针/迭代器
+//如果想要获得下标可以用指针减去，头指针就是下标了
+~~~
 
 ### sort函数
 
@@ -253,6 +321,13 @@ bool cmp(结构体a,结构体b){return a>b;}//按照从大到小排序，不写c
 ```
 
 - sort函数实现排名（PAT A1025）
+- **vector**、**string**也可以用此排序
+
+# 编程语言知识补充
+
+## 函数类
+
+
 
 ### memset函数
 
@@ -389,7 +464,7 @@ Power(x, y);
  if (uid>=s && (uid-s)%n==0)
 ~~~
 
-
+- const和&(传引用)可以加快程序运行速度
 
 # 经典算法的实现
 
@@ -425,8 +500,14 @@ bool isprime(int a) {
   ~~~
 
 - int IsExist[100010]=**{0}**;忘记初始化
+
 - vector<int>  a**[b]**;不能使用中括号！！要使用小括号来预分配空间
+
 - "Yes"No"**大小写**不注意！这种情况下也会报错**答案错误**而不是格式错误。也会有**答案正确**，因为可能你Yes写对了 答案有全是Yes的
+
+- 结构体要写在main外面
+
+
 
 
 

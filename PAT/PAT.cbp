@@ -31,7 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="queueTraining.cpp" />
+		<Unit filename="../code/stackTraining.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
