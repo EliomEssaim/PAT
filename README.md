@@ -19,7 +19,7 @@ The quick brown fox jumps over the lazy dog.
 
 **not compatible** 不兼容
 
-
+**5-digit**五位
 
 # 数据结构
 
@@ -68,7 +68,7 @@ int dec2P(int x,int p)
         z[i]=x%p;
         x/=p;
     }
-    //逆序输出；
+    //逆序输出 可用堆栈实现
 }
 ```
 
@@ -327,8 +327,6 @@ bool cmp(结构体a,结构体b){return a>b;}//按照从大到小排序，不写c
 
 ## 函数类
 
-
-
 ### memset函数
 
 ```c++
@@ -381,7 +379,9 @@ float stoi(string str)//将字符串转换为数字
 
 ~~~c++
 #include <cctype>
-//大小写转换
+//大小写转换 针对单个字符而言！
+ for(int i=0;i<str.size();i++)
+        str[i]=tolower(str[i]);
 ~~~
 
 
@@ -506,6 +506,8 @@ bool isprime(int a) {
 - "Yes"No"**大小写**不注意！这种情况下也会报错**答案错误**而不是格式错误。也会有**答案正确**，因为可能你Yes写对了 答案有全是Yes的
 
 - 结构体要写在main外面
+
+- 由于是英文题对输出格式控制不敏感，如没注意要输出5位（a1032）
 
 
 
