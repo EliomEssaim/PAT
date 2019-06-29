@@ -11,6 +11,8 @@
 - consecutive **连续**
 - utility**实用**
 - Deduplication**去重**
+- degree**度**，代表树中所有节点的子节点数目最大的那个数
+- depth/height**深度/高度**；对树而言都是一个东西
 
 ## 句子
 
@@ -169,7 +171,6 @@ vi.erase(?,?)//单个元素写法 区间的写法
 set<int>::iterator sit=Singles.begin();
 printf("%d",*sit);//set的访问方式
 multiset<int> st;//只排序不去重
-ans[i].name.c_str()//c_str()这样就可以用printf了
 /*********分割线*****************/
 //set的访问方式？
 #include<set>
@@ -358,6 +359,18 @@ bool cmp(结构体a,结构体b){return a>b;}//按照从大到小排序，不写c
 
 # 编程语言知识补充
 
+## 语法
+
+### new
+
+~~~C++
+typename* p=new typename;
+int* p=new int;//申请一个int型变量的空间
+int* p=new int[1000]//申请1000个int型变量的空间
+~~~
+
+
+
 ## 函数类
 
 ### memset函数
@@ -416,8 +429,6 @@ float stoi(string str)//将字符串转换为数字
  for(int i=0;i<str.size();i++)
         str[i]=tolower(str[i]);
 ~~~
-
-
 
 ------
 
@@ -499,6 +510,8 @@ Power(x, y);
 
 - const和&(传引用)可以加快程序运行速度
 
+  
+
 # 经典算法的实现
 
 ## 素数——埃氏筛法
@@ -555,10 +568,6 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
             printf("%05d %d %05d\n",delans[i].addr,delans[i].key,delans[i+1].addr);
         printf("%05d %d -1\n",delans[delans.size()-1].addr,delans[delans.size()-1].key);
 ~~~
-
-
-
-
 
 
 
