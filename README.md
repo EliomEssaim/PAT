@@ -10,6 +10,7 @@
 
 - consecutive **连续**
 - utility**实用**
+- Deduplication**去重**
 
 ## 句子
 
@@ -23,11 +24,27 @@ The quick brown fox jumps over the lazy dog.
 
 # 数据结构
 
+## 链表
+
+- A1032
+
+- A1052
+
+- A1047（如何反转静态链表？如何反转普通的链表？）
+
+- ~~~C++
+  if(delans.size()){//不写这个会出现段错误
+          for(int i=0;(unsigned)i<delans.size()-1;i++)
+              printf("%05d %d %05d\n",delans[i].addr,delans[i].key,delans[i+1].addr);
+        printf("%05d %d -1\n",delans[delans.size()-1].addr,delans[delans.size()-1].key);
+      }
+  ~~~
+
+- 
+
 ## 链表类
 
 ## 树类
-
-
 
 ## 图类
 
@@ -96,6 +113,21 @@ int lcm(int a,int b)
     return a*b/gcd(a,b);
 }
 ```
+
+## 4.BFS
+
+~~~C++
+void BFS(int s){
+    queue<int> q;
+    q.push(s);
+    while(!q.empty()){
+        取出首元素top;
+        访问队首元素top;
+        将队首元素出队;
+        将top的下一层节点中未曾入队的节点全部入队，并设置为已入队;
+    }
+}
+~~~
 
 
 
@@ -228,6 +260,7 @@ q.front();
 q.back();//返回值但不取出
 q.empty();//使用pop和front之前必先使用empty判断是否为空
 q.size();
+//用BFS算法时如果需要的是修改元素而不是访问元素，最好存储编号（如数组的下标）。
 ~~~
 
 ### priority_queue(优先队列)
@@ -508,6 +541,22 @@ bool isprime(int a) {
 - 结构体要写在main外面
 
 - 由于是英文题对输出格式控制不敏感，如没注意要输出5位（a1032）
+
+- 对下标从1开始但却仍在用<=（不自觉的用）
+
+- 题目不会傻到给你一个数据直接输出就好了
+
+- vector分配空间后，没有使用全部大小却使用size
+
+- 无符号-1 变成int类的最大值
+
+~~~C++
+for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size太大的话（超过int的一半）会出问题
+            printf("%05d %d %05d\n",delans[i].addr,delans[i].key,delans[i+1].addr);
+        printf("%05d %d -1\n",delans[delans.size()-1].addr,delans[delans.size()-1].key);
+~~~
+
+
 
 
 
