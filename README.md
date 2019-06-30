@@ -46,9 +46,9 @@ warning: suggest parentheses around assignment used as truth value **==**写成�
   ~~~
 
 
-## 链表类
+## 堆栈与队列
 
-## 树类
+## 树
 
 ~~~C++
 //树的结构体定义
@@ -142,11 +142,9 @@ node* create(int preL,int preR,int inL,int R){
 
 
 
-## 图类
+## 图
 
 
-
-## 堆栈与队列
 
 ## 路径规划
 
