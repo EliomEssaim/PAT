@@ -13,6 +13,7 @@
 - Deduplication**去重**
 - degree**度**，代表树中所有节点的子节点数目最大的那个数
 - depth/height**深度/高度**；对树而言都是一个东西
+- parentheses**括号**
 
 ## 句子
 
@@ -23,6 +24,8 @@ The quick brown fox jumps over the lazy dog.
 **not compatible** 不兼容
 
 **5-digit**五位
+
+warning: suggest parentheses around assignment used as truth value **==**写成了**=**
 
 # 数据结构
 
@@ -42,11 +45,102 @@ The quick brown fox jumps over the lazy dog.
       }
   ~~~
 
-- 
 
 ## 链表类
 
 ## 树类
+
+~~~C++
+//树的结构体定义
+struct node{
+    int data;
+    node* lchild;
+    node* rchild;
+}
+//节点的创建
+node* newNode(int v){
+    node* tmp=new node;
+    tmp->data=v;
+    tmp->lchild=NULL;
+    tmp->rchild=NULL;
+    return tmp;
+}
+//节点的查找以及修改
+void searchAndModifyNode(node* root,int x,int newData){
+    if(root==NULL)
+        return;
+    if(root->data==x){
+        root->data=newData;
+    }else{
+        searchAndModifyNode(root->lchild,x,newData);
+        searchAndModifyNode(root->rchild,x,newData);
+    }
+    return ;
+}
+//插入节点（视情况而定，这里不完整）
+void insertNode(node* &root,int data){
+    if(root==NULL){
+        root=newNode(data);
+        return;
+    }
+    return ;
+}
+//四种遍历
+void preorder(node* root){
+    if(root==NULL)
+        return ;
+    printf("%d",root->data);
+    preorder(root->lchild);
+    preorder(root->rchild);
+}
+void inorder(node* root){
+    if(root==NULL)
+        return ;
+    preorder(root->lchild);
+    printf("%d",root->data);
+    preorder(root->rchild);
+}
+void postorder(node* root){
+    if(root==NULL)
+        return ;
+    preorder(root->lchild);
+    preorder(root->rchild);
+    printf("%d",root->data);
+}
+void layerOrder(node* root){
+    queue<node*> q;
+    q.push(root);
+    while(!q.empty()){
+        node* tmp=q.front();
+        q.pop();
+        printf("%d",tmp->data);
+        if(tmp->lchild!=NULL)
+            q.push(tmp->lchild);
+        if(tmp->rchild!=NULL)
+            q.push(tmp->rchild);
+    }
+    return ;
+}
+//先序+中序创建唯一树
+node* create(int preL,int preR,int inL,int R){
+    int k;
+    node* root=new node;
+    if(inL>inR)//这里写preL>preR一样的效果
+        return NULL;
+    root->data=pre[preL];
+    for(int i=inL;i<=inR;i++){
+        if(in[i]==pre[preL]) k=i;//找到在中序序列值的下标
+    }
+    root.lchild=create(preL+1,preL+1+k-inL-1,inL,k-1);
+    root.rchild=create(preL+k-inL+1,preR,k+1,inR);
+    return root;
+}
+/*说明一下经常模糊的地方*/
+//1、数组的两个下标相减+1为两个下标之间的长度
+//2、pos~pos+lenth实际有lenth+1长所以实际要写入时要减一 string左闭右开就成立了 
+~~~
+
+
 
 ## 图类
 
@@ -150,9 +244,7 @@ vector<int> couple(100000,-1);//这样可以初始化vector为-1
 vector<int> GoodsList(amount);//这个才是vector预分配空间
 vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
 vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest 数组
-ans[i].name.c_str()；//c_str()这样就可以用printf了
 v.push_back(node{s, score, -1, -1, 0});//如果vector是结构体可以这么写
-  
 /*********分割线*****************/
 //vector的访问方式有哪两种？
 #include<vector>
@@ -185,7 +277,7 @@ st.clear();
 
 ## string
 
-sort可用
+- sort可用
 
 ~~~c++
 #include<string>//string忽略空格//string可以用下标访问吗？
@@ -224,7 +316,6 @@ map<string, int> mp;
 - **int会被初始化为0！！**
 - map的会以键**从小到大**排序
 - unodered_map只映射**不排序**（#include <unordered_map>）**C++11**
-- 
 
 ~~~C++
 //map访问方式有哪两种？
@@ -477,8 +568,7 @@ round(double x);
 struct StudentList{
     long long num;
     char name[10];
-    StudentList(int _num,char *_name)
-    {
+    StudentList(int _num,char *_name){
         num=_num;
         name=_name;
     }
