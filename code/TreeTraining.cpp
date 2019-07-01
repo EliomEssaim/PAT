@@ -1,89 +1,31 @@
 #include<iostream>
-#include<cstdio>
+#include<vector>
 #include<queue>
-#include<map>
-#define typename int
+#define maxn 1000
 using namespace std;
 struct node{
     int data;
-    node* lchild;
-    node* rchild;
-};
-node* root=NULL;
-node* newNode(int v){
-    node* tmp=new node;
-    tmp->data=v;
-    tmp->lchild=NULL;
-    tmp->rchild=NULL;
-    return tmp;
+    int layer;
+    vector<int> child;
+} Node[maxn];
+void PreOrder(int root){
+    printf("%d",Node[root].data);
+    for(int i=0; i<(int)Node[root].child.size(); i++)
+        PreOrder(Node[root].child[i]);
 }
-void searchAndModifyNode(node* root,int x,int newData){
-    if(root==NULL)
-        return;
-    if(root->data==x){
-        root->data=newData;
-    }else{
-        searchAndModifyNode(root->lchild,x,newData);
-        searchAndModifyNode(root->rchild,x,newData);
+void LayerOrder(int root){
+    queue<int> Q;
+    Q.push(root);
+    while(!Q.empty()){
+        int tmp=Q.front();
+        Q.pop();
+        printf("%d",Node[tmp].data);
+        for(int i=0;i<Node[tmp].child.size();i++){
+            int child=Node[tmp].child[i];//这个是地址
+            Node[child].layer=Node[tmp].layer+1;
+            Q.push(Node[tmp].child[i]);
+        }
     }
-    return ;
-}
-void insertNode(node* &root,int data){
-    if(root==NULL){
-        root=newNode(data);
-        return;
-    }
-    return ;
-}
-void preorder(node* root){
-    if(root==NULL)
-        return ;
-    printf("%d",root->data);
-    preorder(root->lchild);
-    preorder(root->rchild);
-}
-void inorder(node* root){
-    if(root==NULL)
-        return ;
-    preorder(root->lchild);
-    printf("%d",root->data);
-    preorder(root->rchild);
-}
-void postorder(node* root){
-    if(root==NULL)
-        return ;
-    preorder(root->lchild);
-    preorder(root->rchild);
-    printf("%d",root->data);
-}
-void layerOrder(node* root){
-    queue<node*> q;
-    q.push(root);
-    while(!q.empty()){
-        node* tmp=q.front();
-        q.pop();
-        printf("%d",tmp->data);
-        if(tmp->lchild!=NULL)
-            q.push(tmp->lchild);
-        if(tmp->rchild!=NULL)
-            q.push(tmp->rchild);
-    }
-    return ;
-}
-int pre[10]={0};
-int in[10]={0};
-node* create(int preL,int preR,int inL,int inR){
-    int k;
-    node* root=new node;
-    if(inL>inR)
-        return NULL;
-    root->data=pre[preL];
-    for(int i=inL;i<=inR;i++){
-        if(in[i]==pre[preL]) k=i;
-    }
-    root->lchild=create(preL+1,preL+1+k-inL-1,inL,k-1);//精华
-    root->rchild=create(preL+k-inL+1,preR,k+1,inR);
-    return root;
 }
 int main()
 {

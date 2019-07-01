@@ -31,7 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../code/BFSTraining.cpp" />
+		<Unit filename="../code/TreeTraining.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

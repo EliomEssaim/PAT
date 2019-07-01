@@ -14,6 +14,7 @@
 - degree**度**，代表树中所有节点的子节点数目最大的那个数
 - depth/height**深度/高度**；对树而言都是一个东西
 - parentheses**括号**
+- corresponding**相应的**
 
 ## 句子
 
@@ -26,6 +27,8 @@ The quick brown fox jumps over the lazy dog.
 **5-digit**五位
 
 warning: suggest parentheses around assignment used as truth value **==**写成了**=**
+
+**distinct** positive integer 不同的正整数
 
 # 数据结构
 
@@ -49,6 +52,8 @@ warning: suggest parentheses around assignment used as truth value **==**写成�
 ## 堆栈与队列
 
 ## 树
+
+### 二叉树
 
 ~~~C++
 //树的结构体定义
@@ -122,22 +127,33 @@ void layerOrder(node* root){
     return ;
 }
 //先序+中序创建唯一树
-node* create(int preL,int preR,int inL,int R){
-    int k;
-    node* root=new node;
-    if(inL>inR)//这里写preL>preR一样的效果
-        return NULL;
-    root->data=pre[preL];
-    for(int i=inL;i<=inR;i++){
-        if(in[i]==pre[preL]) k=i;//找到在中序序列值的下标
-    }
-    root.lchild=create(preL+1,preL+1+k-inL-1,inL,k-1);
-    root.rchild=create(preL+k-inL+1,preR,k+1,inR);
-    return root;
+TreeNode* buildTree(int root, int start, int end) {
+    if(start > end) return NULL;
+    int i = start;
+    while(i < end && in[i] != pre[root]) i++;
+    TreeNode* t = new TreeNode();
+    t->left = buildTree(root + 1, start, i - 1);
+    t->right = buildTree(root + 1 + i - start, i + 1, end);
+    t->data = pre[root];
+    return t;
 }
 /*说明一下经常模糊的地方*/
 //1、数组的两个下标相减+1为两个下标之间的长度
 //2、pos~pos+lenth实际有lenth+1长所以实际要写入时要减一 string左闭右开就成立了 
+/*后序+中序转先序*/
+#include <cstdio>
+using namespace std;
+int post[] = {3, 4, 2, 6, 5, 1};
+int in[] = {3, 2, 4, 1, 6, 5};
+void pre(int root, int start, int end) {
+    if(start > end) return ;
+    int i = start;
+    while(i < end && in[i] != post[root]) i++;
+    printf("%d ", post[root]);
+    pre(root - 1 - end + i, start, i - 1);
+    pre(root - 1, i + 1, end);
+}
+
 ~~~
 
 
@@ -235,6 +251,7 @@ vector<int> vi;
 vi.pushback();
 vi.popback();
 vi.size();
+vi.resize();//重新分配空间
 vi.clear();
 vi.insert(?,?);
 vi.erase(?,?)//单个元素写法 区间的写法	
