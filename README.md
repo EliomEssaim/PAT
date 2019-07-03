@@ -358,6 +358,8 @@ using namespace std;
 string str1,str2[n];//n为变量 这种写法是允许的
 str1+=str2;
 str2-=str1;//没有这种写法
+
+scanf("%s", &a[0]);//这样可以使用scanf了
 ans[i].name.c_str()//c_str()这样就可以用printf了
 /*********分割线*****************/
 string str="asdfdfwq",str2;
@@ -683,7 +685,7 @@ Power(x, y);
 
 - const和&(传引用)可以加快程序运行速度
 
-  
+### 用后置++最后的值会变成这个数组的size，使用时注意判断用的是size-1，还是size（a1086）
 
 # 经典算法的实现
 
