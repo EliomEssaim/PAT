@@ -15,6 +15,8 @@
 - depth/height**深度/高度**；对树而言都是一个东西
 - parentheses**括号**
 - corresponding**相应的**
+- emitter**发射器**（emission排放）
+- seniority**资历**
 
 ## 句子
 
@@ -154,6 +156,66 @@ void pre(int root, int start, int end) {
     pre(root - 1, i + 1, end);
 }
 
+~~~
+
+
+
+### 普通树
+
+​	分析树类的题目，写递归算法时，要注意代码和**当前层**的关系，尤其到了递归终点时要判断自己要的数据是否准备好，还是**差一个当前层键值**没有录入。
+
+~~~C++
+struct node{
+    int weight;
+    vector<int> childAddr;
+};
+void bfs(int root){//层序遍历
+    queue<int> q;
+    int layerEnd=root;
+    int layer=0;
+    q.push(root);
+    while(!q.empty()){
+        int frontAddr=q.front();
+        q.pop();
+        if(tree[frontAddr].childAddr.empty()) layerLeaves[layer]++;
+        for(int i=0;i<(int)tree[frontAddr].childAddr.size();i++){
+            q.push(tree[frontAddr].childAddr[i]);
+        }
+        if(frontAddr==layerEnd){
+            if(layerEnd!=root)printf(" %d",layerLeaves[layer]);
+            else printf("%d",layerLeaves[layer]);
+            if(!q.empty()) layerEnd=q.back();//这个q.empty()使用队列或堆栈的值前必须判空
+            layer++;
+        }
+    }
+}
+void dfs(int index, int depth) {//对层用的dfs a1004 把depth去掉就是个dfs模板
+    if(v[index].size() == 0) {
+        book[depth]++;
+        maxdepth = max(maxdepth, depth);
+        return ;
+    }
+    for(int i = 0; i < v[index].size(); i++)
+        dfs(v[index][i], depth + 1);
+}
+/*维护一个公共量 可以记录树的路径 这个公共量可以设为全局变量 遍历时传下标即可*/
+/*==改成>=有if else要判断四个情况是否都是自己想要的*/
+void dfs(int index, int nodeNum, int sum){//a1053的值得二刷暴露很多问题
+    if(sum<target&&tree[index].childAddr.empty()) return;//严谨
+    if(sum>target) return;
+    if(sum==target){
+        if(tree[index].childAddr.empty()){
+            path[nodeNum]=tree[index].weight; 
+            for(int i=0;i<=nodeNum;i++)
+                printf("%d%c",path[i],i==nodeNum?'\n':' ');
+        }
+        else return;
+    }
+    for(int i=0;i<(int)tree[index].childAddr.size();i++){
+        path[nodeNum]=tree[index].weight;
+	 dfs(tree[index].childAddr[i],nodeNum+1,sum+tree[tree[index].childAddr[i]].weight);
+    }
+} 
 ~~~
 
 
@@ -443,6 +505,7 @@ upper_bound(fitst,last,val);//在有序！！数组或者容器中查找第一�
 ```c++
 void sort(数组首地址,数组尾地址+1,cmp函数)
 bool cmp(结构体a,结构体b){return a>b;}//按照从大到小排序，不写cmp就是从小到大
+//sort数组地址（或者说迭代器加上*）是什么类型 cmp的输入参数就是什么类型
 ```
 
 - sort函数实现排名（PAT A1025）
@@ -548,6 +611,9 @@ printf(".2f",a);
 if(state) printf("*");
 printf("%d", i);
 state = true;
+
+//简洁写法
+printf("%d%c", v[path[i]].w, i != nodeNum - 1 ? ' ' : '\n');
 ```
 
 ### 四舍五入
@@ -674,7 +740,12 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
         printf("%05d %d -1\n",delans[delans.size()-1].addr,delans[delans.size()-1].key);
 ~~~
 
-
+- if else分支流程不清楚导致 答案错误 （pat1053）
+- 混淆层与值的对应关系 a1053树的遍历
+- 遍历树时把一个层的特征变量+=了 导致该变量成为一个局部的量被其他兄弟结点共享。a1053的sum
+- 答案错误 if else出现漏洞(难以察觉的逻辑错误)
+- 答案错误、运行时错误：写错符号i写错成j
+- 使用队列或堆栈的值前不判空a1004
 
 
 
