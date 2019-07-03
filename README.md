@@ -32,6 +32,8 @@ warning: suggest parentheses around assignment used as truth value **==**写成�
 
 **distinct** positive integer 不同的正整数
 
+accurate up to 1 decimal **place**精确到小数点后1位
+
 # 数据结构
 
 ## 链表
@@ -155,7 +157,16 @@ void pre(int root, int start, int end) {
     pre(root - 1 - end + i, start, i - 1);
     pre(root - 1, i + 1, end);
 }
-
+//求二叉树的高度
+int PostOrderGetHeight(BinTree){
+    int HL,HR,MaxH;
+    if(BT){
+        HL=PostOrderGetHeight(BT->Left);
+        HR=PostOrderGetHeight(BT->Right);
+        MaxH=(HL>HR)?HL:HR;
+        return (MaxH+1);
+    }else return 0;
+}
 ~~~
 
 
@@ -598,6 +609,8 @@ float stoi(string str)//将字符串转换为数字
 
 **long long**是64位的 18446744073709551616无符号十进制下是 **20位**
 
+**float**比特数为32，有效数字为6-7，数值范围为 -3.4E+38 和 3.4E+38
+
 ### II的优先级小于&&
 
 ### 输出格式控制
@@ -617,6 +630,10 @@ printf("%d%c", v[path[i]].w, i != nodeNum - 1 ? ' ' : '\n');
 ```
 
 ### 四舍五入
+
+- 浮点数保留小数点后的数据，有时会自动四舍五入，有时不会自动四舍五入。题目没说就别写float的四舍五入
+
+  **如果把一个浮点数赋给一个整数变量后，一定不会四舍五入。**
 
 ```c++
 //对float
@@ -746,6 +763,7 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
 - 答案错误 if else出现漏洞(难以察觉的逻辑错误)
 - 答案错误、运行时错误：写错符号i写错成j
 - 使用队列或堆栈的值前不判空a1004
+- 答案没说四舍五入你却四舍五入了a1079
 
 
 

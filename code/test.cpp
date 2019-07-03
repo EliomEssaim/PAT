@@ -1,16 +1,14 @@
 #include<iostream>
 #include<cctype>
 #include<string>
+#include<math.h>
 using namespace std;
 int main()
 {
-    string str;
-    cin>>str;
-    for(int i=0;i<str.size();i++)
-        str[i]=tolower(str[i]);
-    cout<<str<<endl;
-    for(int i=0;i<str.size();i++)
-        str[i]=toupper(str[i]);
-    cout<<str<<endl;
+    double p,r;
+    int depth=2;
+    p=1.80;
+    r=1.00;
+    printf("%.5f\n",7.0*p*pow(1+r/100,depth));
     return 0;
 }
