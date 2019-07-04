@@ -31,7 +31,7 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../code/a1086.cpp" />
+		<Unit filename="../code/a1090.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

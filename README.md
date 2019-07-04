@@ -17,6 +17,7 @@
 - corresponding**相应的**
 - emitter**发射器**（emission排放）
 - seniority**资历**
+- stat**统计**
 
 ## 句子
 
@@ -34,7 +35,13 @@ warning: suggest parentheses around assignment used as truth value **==**写成�
 
 accurate up to 1 decimal **place**精确到小数点后1位
 
+Then the next line contains *N* numbers, each number *S**i* is the index of the supplier for the *i*-th member. *S**r**o**o**t* for the root supplier is defined to be −1.
+
 # 数据结构
+
+## 最优化题目
+
+- 1090. Highest Price in Supply Chain (25)-PAT甲级真题（DFS） 父亲表示法怎么转变为孩子表示；
 
 ## 链表
 
@@ -149,7 +156,7 @@ TreeNode* buildTree(int root, int start, int end) {
 using namespace std;
 int post[] = {3, 4, 2, 6, 5, 1};
 int in[] = {3, 2, 4, 1, 6, 5};
-void pre(int root, int start, int end) {
+void pre(int root, int start, int end) {//root是后序的root，start是中序的start
     if(start > end) return ;
     int i = start;
     while(i < end && in[i] != post[root]) i++;
@@ -317,6 +324,7 @@ vector<int> GoodsList(amount);//这个才是vector预分配空间
 vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
 vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest 数组
 v.push_back(node{s, score, -1, -1, 0});//如果vector是结构体可以这么写
+//vector可以用来做hash！
 /*********分割线*****************/
 //vector的访问方式有哪两种？
 #include<vector>
@@ -391,6 +399,7 @@ map<string, int> mp;
 - **int会被初始化为0！！**
 - map的会以键**从小到大**排序
 - unodered_map只映射**不排序**（#include <unordered_map>）**C++11**
+- **vector**可以用来做hash！快很多
 
 ~~~C++
 //map访问方式有哪两种？
@@ -714,7 +723,10 @@ void BFS(int s){
 }
 ~~~
 
+# 思路错误题目集合
 
+- a1090.Highest Price in Supply Chain (25)-PAT甲级真题（DFS）
+- b1098狼人杀-简单版(20分)
 
 # 常见错误
 

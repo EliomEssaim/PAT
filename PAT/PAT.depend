@@ -103,3 +103,9 @@
 	<stack>
 	<string>
 
+1562253304 source:f:\notes\pat\code\a1090.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<math.h>
+
