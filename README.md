@@ -18,6 +18,7 @@
 - emitter**发射器**（emission排放）
 - seniority**资历**
 - stat**统计**
+- pedigree **血统**
 
 ## 句子
 
@@ -726,7 +727,8 @@ void BFS(int s){
 # 思路错误题目集合
 
 - a1090.Highest Price in Supply Chain (25)-PAT甲级真题（DFS）
-- b1098狼人杀-简单版(20分)
+- b1098狼人杀-简单版(20分) 
+- 缺什么条件补什么条件；
 
 # 常见错误
 

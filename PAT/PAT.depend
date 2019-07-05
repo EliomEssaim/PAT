@@ -109,3 +109,8 @@
 	<algorithm>
 	<math.h>
 
+1562340578 source:f:\notes\pat\code\a1102.cpp
+	<iostream>
+	<vector>
+	<queue>
+
