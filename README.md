@@ -19,6 +19,7 @@
 - seniority**资历**
 - stat**统计**
 - pedigree **血统**
+- exception**异常**
 
 ## 句子
 
@@ -633,6 +634,14 @@ double s=20.7843000;
 cout<<setprecision(6)<<s<<endl; //输出20.7843。
 //小数部分末尾为0时，是输不出来的！如
 cout<<setprecision(8)<<s<<endl; //输出20.7843。
+~~~
+
+## #include cmath
+
+~~~C++
+log(b);//计算以十位底的对数 要计算其他底的可用换底公式 如：
+log(8)/log(2));
+exp(1);//计算自然常数e的n次方 此处为1次方
 ~~~
 
 

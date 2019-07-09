@@ -28,8 +28,7 @@ int main() {
     cout << (*max_element(v1.begin(), v1.end(), cmp1)).y<<endl;
 
 
-    char* str2=to_string(555);;
-
+    str2=to_string(555);
     cout<<str2<<endl;
     return 0;
 }
