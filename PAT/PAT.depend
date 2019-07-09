@@ -92,10 +92,13 @@
 	<vector>
 	<math.h>
 
-1561432134 source:f:\notes\pat\code\test.cpp
+1562634538 source:f:\notes\pat\code\test.cpp
 	<iostream>
 	<cctype>
 	<string>
+	<math.h>
+	<vector>
+	<algorithm>
 
 1562196875 source:f:\notes\pat\code\a1086.cpp
 	<iostream>
