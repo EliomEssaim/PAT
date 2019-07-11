@@ -208,6 +208,61 @@ void insert(node* &root,int x){/*这里是传引用！！！*/
 
 ~~~
 
+#### AVL树
+
+~~~C++
+struct node{
+    int val;
+    node *left,*right;
+}
+//获取树高
+int getHeight(node* root){
+    if(root==NULL) return 0;
+    return max(getHeight(root->left),getHeight(root->right))+1;
+}
+//左旋（可以画个图 理解一下）注意是右子树的右子树超了
+void L(node* &root){
+    node* tmp=root->right;
+    root->right=tmp->left;
+    tmp->left=root;
+    root=tmp;
+}
+//右旋 这是左子树的左子树超了
+void R(node* &root){
+    node* tmp=root->left;
+    root->left=tmp->right;
+    tmp->right=root;
+    root=tmp;
+}
+int GetBalance(node* root){
+    return getHeight(root->left)-getHeight(root->right);
+}
+void insert(node* &root,int val){
+    if(root==NULL){
+        root=new node;
+        root->val=val;
+        root->left=NULL;
+        root->right=NULL;
+        return;
+    }
+    if(root->val<val){
+        insert(root->right,val);//传引用就不用写返回值,这里是插到了右子树
+        if(GetBalance(root)==-2){//插入到右子树只能是会是负值2
+            if(GetBalance(root->right)==-1) L(root);
+            else{R(root->right);L(root);}
+        }
+    }else if(root->val>val){
+        insert(root->left,val);
+        if(GetBalance(root)==2){
+            if(GetBalance(root->left)==1) R(root);
+            else{L(root->left);R(root);}
+        }
+    }
+}
+//建树
+
+~~~
+
 
 
 ### 普通树
@@ -658,7 +713,9 @@ int* p=new int;//申请一个int型变量的空间
 int* p=new int[1000]//申请1000个int型变量的空间
 ~~~
 
+### node* 还是node *？
 
+使用node **a*；作为声明类型语句更好，因为node*不是一个类型名
 
 ## 函数类
 
@@ -812,7 +869,7 @@ Power(x, y);
 
 - const和&(传引用)可以加快程序运行速度
 
-### 用后置++最后的值会变成这个数组的size，使用时注意判断用的是size-1，还是size（a1086）
+- 用后置++最后的值会变成这个数组的size，使用时注意判断用的是size-1，还是size（a1086）
 
 # 经典算法的实现
 
