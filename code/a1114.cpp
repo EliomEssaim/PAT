@@ -2,92 +2,105 @@
 #include<vector>
 #include<algorithm>
 using namespace std;
-struct node{
-    int dad,area=0,estate=0,minChild=10000,familyNums=0;
-    double averArea,averEstate;
+struct DATA {
+	int id, fid, mid, estate, area, members = 0;
 };
-vector<node> father(10010);
-vector<int> root(10010);
-bool cmp(int a,int b){
-    return a>b;
+struct node {
+	int id, TotalMembers;
+	double avrEstate, avrArea;
+	bool isExist = false;
+}ans[10010];
+int father[10010];
+bool visit[10010] = { false };
+int findFather(int x) {
+	int fa = x;
+	while (fa != father[fa]) fa = father[fa];
+	int upfa = x;
+	while (upfa != father[upfa]) {
+		upfa = father[upfa];
+		father[x] = fa;
+		x = upfa;
+	}
+	return fa;
 }
-int findFather(int x){
-    int fa=x;
-    while(fa!=father[fa].dad) fa=father[fa].dad;
-    int upfa=x;
-    while(upfa!=fa){
-        upfa=father[upfa].dad;
-        father[x].dad=fa;
-        x=upfa;
-    }
-    if(father[fa].minChild>x)
-        father[fa].minChild=x;
-    return fa;
+void Union(int a, int b) {
+	int fa = findFather(a);
+	int fb = findFather(b);
+	if (fa > fb) father[fa] = fb;//敲黑板！！
+	if (fa < fb) father[fb] = fa;
 }
-void Union(int a,int b){
-    int fa=findFather(a);
-    int fb=findFather(b);
-    if(fa!=fb) father[fb].dad=fa;
+bool cmp(node a, node b) {
+	return a.avrArea != b.avrArea ? a.avrArea > b.avrArea:a.id < b.id;
 }
-int main(){
-    int n,id,fat,mot,k,child,estate,area;
-    scanf("%d",&n);
-    for(int i=0;i<(int)father.size();i++)
-        father[i].dad=i;
-    for(int i=0;i<n;i++){
-        bool isSole=true;
-        scanf("%d%d%d%d",&id,&fat,&mot,&k);
-        if(fat!=-1){
-            int fa_fat=findFather(fat);
-            if(fa_fat!=fat) isSole=false;
-            Union(id,findFather(fat));
-            father[id].familyNums++;
-        }
-        if(mot!=-1){
-            int mot_fa=findFather(mot);
-            if(mot_fa!=mot) isSole=false;
-            Union(id,findFather(mot));
-            father[id].familyNums++;
-        }
-        while(k--){
-            scanf("%d",&child);
-            int child_fa=findFather(child);
-            if(child_fa!=child) isSole=false;
-            Union(id,findFather(child));
-            father[id].familyNums++;
-        }
-        scanf("%d%d",&estate,&area);
-        father[id].estate=estate;
-        father[id].area=area;
-        father[id].familyNums++;
-        int fa_id=findFather(id);
-        if(fa_id!=id) isSole=false;
-        if(!isSole){
-            father[findFather(id)].area+=area;
-            father[findFather(id)].estate+=estate;
-            father[findFather(id)].familyNums+=father[id].familyNums;
-        }
-    }
-    int cnt=0;
-    for(int i=0;i<10010;i++){
-        if(father[i].familyNums!=0){
-            root[findFather(i)]++;
-        }
-    }
-    vector<int> rootID;
-    for(int i=0;i<10010;i++)
-    if(root[i]!=0){
-        cnt++;
-        rootID.push_back(i);
-        father[i].averArea=(double)father[i].area/(double)father[i].familyNums;
-        father[i].averEstate=(double)father[i].estate/(double)father[i].familyNums;
-    }
-    sort(root.begin(),root.end(),cmp);
-    for(int i=0;i<(int)root.size();i++){
-        printf("%04d %d %.3lf %.3lf",\
-      father[root[i]].minChild,\
-      father[root[id]].familyNums,\
-      father[root[id]].averArea,\
-      father[root[id]].averEstate);
-    }
+int main() {
+	int n, k, childID;
+	vector<DATA> Data;
+	scanf("%d", &n);
+	for (int i = 0; i < 10010; i++)
+		father[i] = i;
+	Data.resize(n);
+	for (int i = 0; i < n; i++) {
+		scanf("%d%d%d%d", &Data[i].id, &Data[i].fid, &Data[i].mid, &k);
+		if (visit[Data[i].id] == false){
+			Data[i].members++; visit[Data[i].id] = true;
+		};
+		//柳神的data不是用id做索引而是以下标为索引！！体会一下
+		if (Data[i].fid != -1) {
+			Union(Data[i].id, Data[i].fid);
+			if (visit[Data[i].fid] == false){
+				Data[i].members++; visit[Data[i].fid] = true;
+			};
+			//会重复计算！！没有想到
+		}
+		if (Data[i].mid != -1) {
+			Union(Data[i].id, Data[i].mid);
+			if (visit[Data[i].mid] == false){
+				Data[i].members++; visit[Data[i].mid] = true;
+			};
+		}
+		for (int j = 0; j < k; j++) {
+			scanf("%d", &childID);
+			Union(Data[i].id, childID);
+			if (visit[childID] == false){
+				Data[i].members++; visit[childID] = true;
+			};
+		}
+		scanf("%d%d", &Data[i].estate, &Data[i].area);
+	}
+	int cnt = 0;
+	for (int i = 0; i < n; i++) {
+		ans[findFather(Data[i].id)].id = findFather(Data[i].id);
+		ans[findFather(Data[i].id)].TotalMembers += Data[i].members;
+		ans[findFather(Data[i].id)].avrArea += Data[i].area;
+		ans[findFather(Data[i].id)].avrEstate += Data[i].estate;
+		ans[findFather(Data[i].id)].isExist = true;
+	}
+	for (int i = 0; i < 10010; i++) {
+		if (ans[i].isExist == true) {
+			cnt++;
+			ans[i].avrArea = (double)ans[i].avrArea / (double)ans[i].TotalMembers;
+			ans[i].avrEstate = (double)ans[i].avrEstate / (double)ans[i].TotalMembers;
+		}
+	}
+	sort(ans, ans + 10010, cmp);
+	printf("%d\n", cnt);
+	for (int i = 0; i < cnt; i++)
+		printf("%04d %d %.3lf %.3lf\n", ans[i].id, ans[i].TotalMembers, \
+			ans[i].avrEstate, ans[i].avrArea);
+	return 0;
 }
+
+//我所遇到的问题：
+/*
+1.如何实现集合的表示？以及如何让有交集的集合合并？
+还有如何让集合和其他信息房产挂钩？
+使用并查集：难以实现交集则合并且根唯一
+思路是先合并一组数据 然后判断这个家族是否有成员是其他
+（判断有没有父亲再合并这个方法真的蠢爆了）
+（因为father仅仅是第一个不具有什么特征，所以担心father会改来改去 同一集合）
+集合的一部分（写个flag） 如果是则和那个集合合并
+
+*/
+/*
+用数组分割功能
+*/
