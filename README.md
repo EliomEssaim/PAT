@@ -20,6 +20,9 @@
 - stat**统计**
 - pedigree **血统**
 - exception**异常**
+- Clusters**集群**
+- estate**房产**
+- ascending **上升**
 
 ## 句子
 
@@ -221,7 +224,7 @@ int getHeight(node* root){
     return max(getHeight(root->left),getHeight(root->right))+1;
 }
 //左旋（可以画个图 理解一下）注意是右子树的右子树超了
-void L(node* &root){
+void L(node* &root){//有点不熟练
     node* tmp=root->right;
     root->right=tmp->left;
     tmp->left=root;
@@ -321,6 +324,35 @@ void dfs(int index, int nodeNum, int sum){//a1053的值得二刷暴露很多问�
 	 dfs(tree[index].childAddr[i],nodeNum+1,sum+tree[tree[index].childAddr[i]].weight);
     }
 } 
+~~~
+
+### 并查集
+
+- 对待father数组要把他当成无路径压缩的树 不容易出错
+
+~~~C++
+//初始化
+for(int i=0;i<n;i++){
+    father[i]=i;
+}
+//查找
+int findFather(int key){
+    int fa=key;
+    while(fa!=father[fa]) fa=father[fa];
+    int upfa=key;
+    while(upfa!=fa){//这个while不熟练
+        upfa=father[fa];
+        father[key]=fa;
+        key=upfa;
+    }
+    return fa;
+}
+//合并
+void Union(int a,int b){
+    int fa=findFather(a);
+    int fb=findFather(b);
+    if(fa!=fb) father[fa]=b;//这里是fa而不是a要最终结果
+}
 ~~~
 
 
@@ -645,6 +677,10 @@ upper_bound(fitst,last,val);//在有序！！数组或者容器中查找第一�
 void sort(数组首地址,数组尾地址+1,cmp函数)//不能用>= <=
 bool cmp(结构体a,结构体b){return a>b;}//按照从大到小排序，不写cmp就是从小到大
 //sort数组地址（或者说迭代器加上*）是什么类型 cmp的输入参数就是什么类型
+//比较的话是数字元素之间进行比较
+int root[10010];
+sort(root.begin(),root.end(),cmp)//cmp return的应该是a>b就好了而不是root[a]>root[b]
+    //cmp传入的是整个数组的值 而不是下标！！！！！！
 ```
 
 - sort函数实现排名（PAT A1025）
@@ -716,6 +752,8 @@ int* p=new int[1000]//申请1000个int型变量的空间
 ### node* 还是node *？
 
 使用node **a*；作为声明类型语句更好，因为node*不是一个类型名
+
+### \可以用于续行
 
 ## 函数类
 
@@ -898,12 +936,7 @@ void BFS(int s){
 }
 ~~~
 
-# 思路错误题目集合
 
-- a1090.Highest Price in Supply Chain (25)-PAT甲级真题（DFS）
-- b1098狼人杀-简单版(20分) 
-- 缺什么条件补什么条件；
-- 1043 Is It a Binary Search Tree (25 分)
 
 # 常见错误
 
@@ -986,10 +1019,20 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
 - 指针却使用了.(a1115)
 - 没有写括号
 - i写成j
+- **left写成right！！！对称的东西用了一下复制结果该改变的没有变全**
 
+## 思路错误题目集合
 
+- a1090.Highest Price in Supply Chain (25)-PAT甲级真题（DFS）
+- b1098狼人杀-简单版(20分) 
+- 缺什么条件补什么条件；
+- 1043 Is It a Binary Search Tree (25 分)
+- a1107.Social Clusters (30)-PAT甲级真题（并查集） **二刷**
 
-
+~~~C++
+1.路径压缩可能不完全需要能用findfather就用findfather
+2.root的位置确定的有问题 等价条件的判断
+~~~
 
 
 
