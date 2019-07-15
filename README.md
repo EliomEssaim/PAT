@@ -23,6 +23,8 @@
 - Clusters**集群**
 - estate**房产**
 - ascending **上升**
+- indices**指数**
+- queries**咨询**
 
 ## 句子
 
@@ -352,7 +354,7 @@ void Union(int a,int b){
     int fa=findFather(a);
     int fb=findFather(b);
     if(fa!=fb) father[fa]=b;//这里是fa而不是a要最终结果
-}
+}//要固定某种值作为根节点 可以利用合并时的代码来实现 如比较大小 小者为根 还可以实现交集就并集的效果
 ~~~
 
 
