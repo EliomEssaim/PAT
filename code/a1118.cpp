@@ -34,6 +34,7 @@ int main(){
     for(int i=0;i<n;i++){
         scanf("%d",&k);
         vector<int> birds;
+
         birds.resize(k);
         for(int j=0;j<k;j++)
             scanf("%d",&birds[j]);

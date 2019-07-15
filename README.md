@@ -25,6 +25,7 @@
 - ascending **上升**
 - indices**指数**
 - queries**咨询**
+- iterates**迭代**
 
 ## 句子
 
@@ -267,6 +268,56 @@ void insert(node* &root,int val){
 //建树
 
 ~~~
+
+#### 堆
+
+```C++
+//优先队列会自动是实现下面看看就好
+const int maxn=100;
+int heap[maxn],n=10;
+void downAdjust(int low,int high){
+    int faPos=low,childID=2*low;
+    while(childID<=high){
+        if(childID+1<=high&&heap[childID+1]>heap[childID])
+            childID++;
+        if(heap[childID]>heap[faPos])
+            swap(heap[childID],heap[faPos]);
+        faPos=childID;
+        childID=faPos*2;
+    }
+}
+void createHeap(){
+    for(int i=n/2;i>=1;i--)
+        downAdjust(i,n);
+}
+void deleteHeapTop(){
+    heap[1]=Heap[n--];
+    downAdjust(1,n);
+}
+void upAdjust(int low,int high){
+    int childID=high;faPos=High/2;
+    while(faPos>=1){
+        if(heap[faPos]<heap[childID])
+            swap(hep[faPos],heap[childID]);
+        childID=faPos;
+        faPos=childID/2;
+        else break;//后面已经有序 没有必要进行了
+    }
+}
+void HeapSort(){
+    createHeap();
+    for(int i=n;i>1;i--){
+        swap(heap[1],heap[i]);
+        downAdjust(1,i-1);
+    }
+}
+```
+
+#### 哈夫曼树
+
+```C++
+//着重掌握思想
+```
 
 
 
@@ -575,7 +626,7 @@ q.top();//返回值但不取出
 q.push();
 q.pop();//取出但不返回值
 q.empty();//无论是优先队列还是
-priority_queue<int,vector<int>,less<int> >q;//less<int> 从顶向下变小如果是greater<int> 从顶向下变大
+priority_queue<int,vector<int>,less<int> >q;//less<int> 从顶向下变小如果是greater<int> 从顶向下变大 默认是大堆顶
 /************结构体的优先队列**************/
 struct fruit{
         string name;
@@ -1017,6 +1068,8 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
   ~~~
   
 - **codeblocks很傻X %lf用不了注意！判断有没有出数据可以看数据是否被排序了**
+
+- **没有填上while循环内变量的终止条件！！**导致了**答案错误**a1098
 
 ## 拼写错误集合
 
