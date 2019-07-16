@@ -227,7 +227,7 @@ int getHeight(node* root){
     return max(getHeight(root->left),getHeight(root->right))+1;
 }
 //左旋（可以画个图 理解一下）注意是右子树的右子树超了
-void L(node* &root){//有点不熟练
+void L(node* &root){//有点不熟练 记得传引用
     node* tmp=root->right;
     root->right=tmp->left;
     tmp->left=root;
@@ -317,6 +317,17 @@ void HeapSort(){
 
 ```C++
 //着重掌握思想
+//不用考虑用什么数据结构来存放多个树 只要从优先队列里面拿出两个再塞回去就好了
+while(q.size()>1){//保证有两个
+    int x=q.top();
+    q.pop();
+    int y=q.top();
+    q.pop();
+    q.push(x+y);
+    ans+=x+y;
+}
+/*哈夫曼编码*/
+//
 ```
 
 
@@ -886,7 +897,7 @@ float stoi(string str)//将字符串转换为数字
 
 **float**比特数为32，有效数字为6-7，数值范围为 -3.4E+38 和 3.4E+38
 
-最大值可以通过cfloat 文件中取到DBL_MAX。
+最大值可以通过cfloat 文件中取到**DBL_MAX**。
 
 ### II的优先级小于&&
 
@@ -1036,7 +1047,7 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
         printf("%05d %d -1\n",delans[delans.size()-1].addr,delans[delans.size()-1].key);
 ~~~
 
-- if else分支流程不清楚导致 答案错误 （pat1053）
+- if else分支流程不清楚导致 **答案错误** （pat1053）
 
 - 混淆层与值的对应关系 a1053树的遍历
 
@@ -1046,7 +1057,7 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
 
 - 答案错误、运行时错误：写错符号i写错成j
 
-- 使用队列或堆栈的值前不判空a1004
+- 使用队列或堆栈的值前**不判空**a1004
 
 - 答案没说四舍五入你却四舍五入了a1079
 
