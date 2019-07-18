@@ -423,9 +423,66 @@ void Union(int a,int b){
 
 ## 图
 
+~~~C++
+/*1、存储方式*/
+//邻接矩阵，占用内存。
+//就是二维数组
+//邻接表
+//用vector实现
+struct node{
+    int vertex;
+    int weight;
+};
+vector<node> Adj[N];
+const int MAXV=1000;//邻接矩阵不要超过这个值64MB 这个值超过8000就GG
+const int INF=1000000000;
+/**********************************图的遍历**********************************/
+//邻接矩阵
+//一般不超过1000
+int n,G[MAXV][MAXV];
+bool vis[MAXV]={false};
+void DFS(int u,int depth){//这是顶点的DFS
+    vis[u]=true;
+    for(int v=0;v<n;v++){
+        if(vis[v]==false&&G[u][v]!=INF){
+            DFS(v,depth+1);
+        }
+    }
+}
+void DFSTravel(){
+    for(int u=0;u<n;u++){//访问所有的连通分量
+        if(vis[u]==false){
+            DFS(u,1);
+        }
+    }
+}
+//邻接表
+//访问Adj[0]实际上是访问边而不是访问节点；
+//visit表示节点被访问过而不是边
+//邻接表不适用于需要访问节点的所有指向自己的边和指向其他节点的边，如需要统计直接相连的所有边的权值
+//而邻接表的优点是节省空间，只存储实际存在的边。其缺点是关注顶点的度时，就可能需要遍历一个链表。还有一个缺点是，对于无向图，如果需要删除一条边，就需要在两个链表上查找并删除。
+vector<int> Adj[MAXV];
+int n;//n为顶点数
+bool vis[MAXV]={false};
+void DFS(int u,int depth){
+    vis[u]=true;
+    for(int v=0;v<Adj[u].size();v++){
+        if(vis[v]==false)
+            DFS(v,depth+1)
+    }
+}
+void DFSTravel(){
+    for(int u=0;u<n；u++){
+        if(vis[u]==false){
+            DFS(u,1);
+        }
+    }
+}
+~~~
 
 
-## 路径规划
+
+
 
 ------
 
@@ -507,8 +564,12 @@ vector<int> couple(100000,-1);//这样可以初始化vector为-1
 vector<int> GoodsList(amount);//这个才是vector预分配空间
 vector<int> guest[guestNum];//错误声明方法这样生成的数组是vector<int>类型的不能直接赋值
 vector<int> guest(guestNum);//正确声明长度为guestNum 首地址为guest 数组
-v.push_back(node{s, score, -1, -1, 0});//如果vector是结构体可以这么写
+v.push_back(node{s, score, -1, -1, 0});//如果vector是结构体可以这么写 但是必须是同一类型
 //vector可以用来做hash！
+/*二维可边长数组*/
+vector<node> map[100];
+//声明一个二维可边长数组，第二维是100个，第一维度的长度可以任意指定。注意map[0].vertex这个写法是不对的
+//因为 map[0] 代表一个类型为node可变长数组，本身没有vertex这个属性。map[0][0].vertex;
 /*********分割线*****************/
 //vector的访问方式有哪两种？
 #include<vector>
@@ -543,6 +604,7 @@ st.clear();
 ## string
 
 - sort可用
+- string要先resize()不然不能用？
 
 ~~~c++
 #include<string>//string忽略空格//string可以用下标访问吗？
@@ -551,7 +613,8 @@ string str1,str2[n];//n为变量 这种写法是允许的
 str1+=str2;
 str2-=str1;//没有这种写法
 str=str+'5'+'2'+'f';//在末尾追加52f 不能用+=
-scanf("%s", &a[0]);//这样可以使用scanf了
+scanf("%s", &a[0]);//这样可以使用scanf了 不要用这个!!!用cout不然会和其他的容器出问题
+//或者先分配空间！！！！！
 ans[i].name.c_str()//c_str()这样就可以用printf了
 /*********分割线*****************/
 string str="asdfdfwq",str2;
@@ -599,6 +662,7 @@ map<char,int>::iterator it=mp.begin();
 it.first=?;
 it.second=?;
 mp.find(?);
+//mp.find(str)!=mp.end() 可以帮助我们判断str有没有出现过
 mp.erase(?);//删除单个元素的两种方法？删除区间元素的一个方法
 mp.size();
 mp.clear();
@@ -1031,7 +1095,9 @@ void BFS(int s){
 
 - 结构体要写在main外面
 
-- 由于是英文题对输出格式控制不敏感，如没注意要输出5位（a1032）
+- 由于是**英文题**对输出格式控制不敏感，如没注意要输出5位（a1032）
+
+- 由于是**英文题目**忽略的对**排序的要求**
 
 - 对下标从1开始但却仍在用<=（不自觉的用）
 

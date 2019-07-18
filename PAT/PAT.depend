@@ -167,3 +167,10 @@
 	<algorithm>
 	<cmath>
 
+1563378170 source:f:\notes\pat\code\a1034.cpp
+	<iostream>
+	<cstdio>
+	<vector>
+	<string>
+	<map>
+
