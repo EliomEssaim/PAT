@@ -26,6 +26,7 @@
 - indices**指数**
 - queries**咨询**
 - iterates**迭代**
+- Connected Component**连通分量**
 
 ## 句子
 
@@ -478,6 +479,109 @@ void DFSTravel(){
         }
     }
 }
+
+/*BFS*/
+int n,G[MAXV][MAXV];
+bool inq[MAXV]={false};//代表曾经在队列的和dfs不一样要注意
+void BFS(int u){
+    queue<int> q;
+    q.push(u);
+    inq[u]=true;
+    while(!q.empty()){
+        int u=q.front();
+        q.pop();
+        for(int v=0;v<n;v++){
+            if(inq[v]==false&&G[u][v]!=INF){
+                q.push(v);
+                inq[v]=true;
+            }
+        }
+    }
+}
+void BFSTravel(){
+    for(int u=0;u<n;u++){
+        if(inq[u]==false){
+            BFS[u];
+        }
+    }
+}
+//邻接表版
+vector<int> Adj[MAXV];
+int n;
+bool inq[MAXV]={false};
+void BFS(int u){
+    queue<int> q;
+    q,push(u);
+    inq[u]=true;
+    while(!q.empty()){
+        int u=q.front();
+        q.pop();
+        for(int i=0;i<Adj[u].size();i++){
+            int v=Adj[u][i];
+            if(inq[v]==false){
+                q.push(v);
+                inq[v]=true;
+            }
+        }        
+    }
+}
+void BFSTravel(){
+    for(int u=0;u<n;u++){
+        if(inq[u]==false){
+            BFS(u);
+        }
+    }
+}
+
+struct node{
+    int v;
+    int layer;
+};
+vector<node> Adj[N];
+void BFS(int s){
+    queue<node> q;
+    Node start;
+    start.v=s;
+    start.layer=0;
+    q.push(start);
+    inq[start.v]=true;
+    while(!q.empty()){
+        Node topNode=q.front();
+        q.pop();
+        int u=topNode.v;
+        for(int i=0;i<Adj[u].size();i++){
+            Node next=Adj[u][i];
+            next.layer=topNode.layer+1;
+            if(inq[next.v]==false){
+                q.push(next);
+                inq[next.v]=true;
+            }
+        }
+    }
+}
+//拓展BFS 不用node的layer用王道书的levelEnd做也可以
+void BFS(int poster){
+    bool OnceInQueue[MAXV]={false};
+    queue<int> q;int level=0,levelEnd;
+    q.push(poster);
+    levelEnd=poster;
+    OnceInQueue[poster]=true;
+    while(!q.empty()){
+        int frontElment=q.front();
+        q.pop();
+        for(int i=0;i<(int)Adj[frontElment].size()&&level<L;i++){
+            if(OnceInQueue[Adj[frontElment][i]]==false){
+                q.push(Adj[frontElment][i]);
+                OnceInQueue[Adj[frontElment][i]]=true;
+                ans[ansIndex]++;
+            }
+        }
+        if(frontElment==levelEnd){//重点代码：什么时候更新以及怎么更新
+            level++;
+            levelEnd=q.back();
+        }
+    }
+}
 ~~~
 
 
@@ -877,11 +981,15 @@ int* p=new int;//申请一个int型变量的空间
 int* p=new int[1000]//申请1000个int型变量的空间
 ~~~
 
+- 在函数中使用new或者malloc，返回时这块空间**不会被释放,**而是保留在堆中，直到有delete或者free;
+
 ### node* 还是node *？
 
 使用node **a*；作为声明类型语句更好，因为node*不是一个类型名
 
 ### \可以用于续行
+
+- 只有0可以用 ={0};赋值
 
 ## 函数类
 
@@ -1155,6 +1263,7 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
 - i写成j
 - **left写成right！！！对称的东西用了一下复制结果该改变的没有变全** 犯错次数2
 - +=写成=
+- ConcernedCities[i]写成了i
 
 ## 思路错误题目集合
 
