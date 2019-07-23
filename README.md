@@ -27,6 +27,70 @@
 - queries**咨询**
 - iterates**迭代**
 - Connected Component**连通分量**
+- acyclic **无环**
+
+### 树/图类专业名词
+
+- 树   Tree
+- 二叉树   Binary   tree
+- 满二叉树   Full   binary   tree
+- 完全二叉树   Complete   binary   tree
+- 二叉排序树   Binary   sort   tree
+- 二叉搜索树   Binary   search   tree
+- 前序遍历   Preorder   traversal
+- 中序遍历   Inorder   traversal
+- 后序遍历   Postorder   traversal
+- 哈夫曼树   Huffman   tree
+- 线索二叉树 threaded binary tree
+- 回溯   Backtrackins
+- 图   Graph
+- 有向图   Directed   graph   (digraph)
+- 无向图   Undirected   graph   (undigraph)
+- 有向完全图   Undirected   Complete   Graph
+- 无向完全图   directed   complete   graph
+- 非连通图 unconnected graph
+- 强连通图 strongly connected graph 
+- 弱连通图 weakly connected graph
+- 稀疏图   Sparse   graph
+- 稠密图   Dense   graph
+- 网点   Network
+- 邻结点   Adjacent
+- 度   Degree
+- 出度   Outdegree
+- 入度   Indegree
+- 连通图   Connected   graph
+- **连通分支**   **Connected   component**
+- 强连通图   Strong   graph
+- **生成树   Spanning   tree**
+- 邻接矩阵   **Adjacency**  matrix
+- 邻接表   Adjacency   lists
+- 邻接多重表   Adjacency   multilists
+- 深度优先索引   Depth-First   Search
+- 广度优先索引   Breath-First   Search
+- 最小生成树   Minimum   spanning   tree
+- 最短路径   Shortest   path
+- 有向无环图   Directed   **acyclic** graph
+- 拓扑排序   Topological   sort
+
+### 其他专有名词
+
+- 顺序存储结构   **Sequential**   storage   structure
+- 直接前驱   Immediate   **predecessor**
+- 直接后继   Immediate   successor
+- 循环链表   Circylar   linked   lists
+- 双向链表   Double   linked   lists
+- 双向循环链表   Double   circular   linked   list
+
+- 特殊矩阵   Special   matrices
+- 稀疏矩阵   **Sparse   matrices**
+- 分块检索   Blocking   search
+- 直接定址   Immediately   allocate
+- 平方取中法   Mid-square   method
+- 开放定址法   Open   addressing
+- 直接选择排序   Straight   selection   sort
+- 基数排序   Radix   sorting
+- 最低位优先(LSD)   Least   Significant   Digit   First
+- 最高位优先(MSD)   Most   Significant   Digit   First
 
 ## 句子
 
@@ -991,6 +1055,20 @@ int* p=new int[1000]//申请1000个int型变量的空间
 
 - 只有0可以用 ={0};赋值
 
+### for循环补充
+
+~~~C++
+#include<iostream>
+using namespace std;
+int main(){
+    int a=0;
+    for(int i=0;i<3&&i;i++) a++;
+    cout<<a<<endl;//a是0！！第一次判断出错就会直接退出
+}
+~~~
+
+
+
 ## 函数类
 
 ### memset函数
@@ -1255,6 +1333,8 @@ for(int i=0;i<(int)delans.size()-1;i++)//最好这么写，但是要注意size�
 - **codeblocks很傻X %lf用不了注意！判断有没有出数据可以看数据是否被排序了**
 
 - **没有填上while循环内变量的终止条件！！**导致了**答案错误**a1098
+
+- 因为常量值设置的太小导致**段错误**和**答案错误** a1021
 
 ## 拼写错误集合
 
