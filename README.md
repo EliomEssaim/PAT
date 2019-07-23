@@ -125,6 +125,31 @@ Then the next line contains *N* numbers, each number *S**i* is the index of the 
 - A1047（如何反转静态链表？如何反转普通的链表？）
 
 - ~~~C++
+  //数据定义
+  struct node{
+      typename data;
+      node* next;
+  }
+  //静态链表的定义
+  struct node{
+      int data;
+      int next;
+  }Node[10010];
+  //插入元素
+  void insert(node* head,int pos,int x){
+      int workPointer=head->next;
+  	while(workPointer!=NULL&&pos!=0){
+          workPointer=workPointer->next;
+          pos--;
+  	}
+          
+      if(workPointer!=NULL){
+          node* p=new node;
+          p.next=workPointer.next;
+          p.data=x;
+          workPointer.next=p;
+      }
+  }
   if(delans.size()){//不写这个会出现段错误
           for(int i=0;(unsigned)i<delans.size()-1;i++)
               printf("%05d %d %05d\n",delans[i].addr,delans[i].key,delans[i+1].addr);
@@ -488,6 +513,8 @@ void Union(int a,int b){
 
 ## 图
 
+### 图的存储以及遍历
+
 ~~~C++
 /*1、存储方式*/
 //邻接矩阵，占用内存。
@@ -642,8 +669,48 @@ void BFS(int poster){
         }
         if(frontElment==levelEnd){//重点代码：什么时候更新以及怎么更新
             level++;
-            levelEnd=q.back();
+            if(!q.empty())levelEnd=q.back();//又忘记加上了
         }
+    }
+}
+~~~
+
+### Dijkstra算法
+
+~~~C++
+//伪代码
+Dijkstra(G,dist[],s){
+    初始化;
+    for(循环n次){
+        u=dist[]中未被加入集合s中的最小的顶点;
+        标记u被访问过;
+        for(;u的邻结点v;){
+            if(v不在集合中&&v优化过后的值比当前的更小){
+                dist[v]=优化后的值;
+            }
+        }
+    }
+}
+const int MAXV=1000;
+const int INF=0x3fffffff;
+//邻接矩阵
+int n,G[MAXV][MAXV];
+int dist[MAXV];
+bool isVisited[MAXV]={false};
+void Dijkstra(int s){
+    fill(dist,dist+MAXV,INF);
+    dist[s]=0;
+    int u=s;
+    for(int i=0;i<n;i++){
+        int minWeight=INF;
+        int selectVertex=1;
+        isVisited[u]=true;
+        for(v=1;v<=n;v++){
+            if(G[u][v]!=0&&isVisited[v]==false&&G[u][v]<minWeight)
+                minWeight=G[u][v];
+             	selectVertex=v;
+        }
+        for()
     }
 }
 ~~~
@@ -1148,6 +1215,8 @@ float stoi(string str)//将字符串转换为数字
 **float**比特数为32，有效数字为6-7，数值范围为 -3.4E+38 和 3.4E+38
 
 最大值可以通过cfloat 文件中取到**DBL_MAX**。
+
+用**0x3fffffffH**来表示**inf**
 
 ### II的优先级小于&&
 
