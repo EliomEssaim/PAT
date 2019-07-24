@@ -693,25 +693,106 @@ Dijkstra(G,dist[],s){
 }
 const int MAXV=1000;
 const int INF=0x3fffffff;
+int path[MAXV];
 //邻接矩阵
 int n,G[MAXV][MAXV];
 int dist[MAXV];
 bool isVisited[MAXV]={false};
 void Dijkstra(int s){
     fill(dist,dist+MAXV,INF);
+    for(int i=0;i<n;i++) path[i]=i;
     dist[s]=0;
-    int u=s;
-    for(int i=0;i<n;i++){
+    int i=0
+    for(;i<n;i++){
         int minWeight=INF;
-        int selectVertex=1;
-        isVisited[u]=true;
-        for(v=1;v<=n;v++){
-            if(G[u][v]!=0&&isVisited[v]==false&&G[u][v]<minWeight)
+        int u=-1;
+        for(v=1;v<=n;v++){//在所有顶点中遍历
+            if(isVisited[v]==false&&dist[v]<minWeight)
+                //如果这个顶点未被访问且 距离小于当前最小的顶点
                 minWeight=G[u][v];
-             	selectVertex=v;
+             	u=v;
         }
-        for()
+        if(u==-1) return;//找不到说明不连通 dist只有集合内和集合的邻结点被初始化过
+        isVisited[u]=true;
+        for(int v=1;v<=n;v++){
+            if(isVisited[v]==false&&G[u][v]!=0&&(G[u][v]+dist[u]<dist[v])){
+                //如果该边存在,未被访问过(减少了判断 被访问过说明在集合内 在集合内说明dist已经被优化成最短的了),而且 距离更小
+                dist[v]=G[u][v]+dist[u];//用这条边去优化路径
+                path[v]=u;
+            }
+        }
     }
+    if(i<n-1){
+        printf("不连通你\n");
+    }
+}
+//邻接矩阵
+const int MAXV=10010,INF=0x3fffffff;
+vector<vector<int>> Adj[MAXV];//可以用resize
+vector<int> dist[MAXV];
+bool isVisited[MAXV]={false};
+void Dijkstra(int s){
+    fill(dist,dist+MAXV,INF);
+    dist[s]=0;
+    isVisited[s]=true;
+    int i=0;
+    for(;i<n;i++){
+        int u=-1,minWeight=INF;
+        for(int v=1;v<=n;v++){//可以n 不要用MAXV
+            if(isVisited[v]==false&&dist[v]<minWeight){
+                minWeight=dist[v];
+                u=v;
+            }
+        }
+        if(u=-1) return;
+        isVisited[u]=true;
+        for(int j=0;j<Adj[u].size();j++){//注意Adj要resize成n+1 不行 resize成n+1也不行
+            //会造成访问越界 因为这个点的邻结点不是连续的存放在Adj的后面
+            int v=Adj[u][j].vertex;
+            if(isVisited[v]==false&&(dist[u]+Adj[u][j].weight<dist[v]))
+                dist[v]=dist[u]+Adj[u][j].weight;//这个不能用i因为上面重复了
+           		path[v]=u;
+        }
+    }
+}
+//顺序输出源点到目标节点的路径
+void DFS(int vertex,int source){
+    if(vertex==source) {
+        printf("%d\n",source);
+        return ;
+    }
+    DFS(path[vertex],source);
+    printf("%d\n",vertex);
+}
+//题型
+//要求除了最短外还有条第二标尺（优先级没有最短高） 来求出最优路径
+//此时一般有多条最短路径
+//不要求输出路径且仅仅要求输出最后的结果（比如最短路径长最小花费值）
+//只要新加一条数组处理边权相等时的情况 以及在更新dist时顺便把改数据也更新了
+//1、新增了一种边权要求改边权最小
+if(isVisited[v]==false&&(dist[u]+Adj[u][j].weight<dist[v])){
+    dist[v]=dist[u]+Adj[u][j].weight;//这个不能用i因为上面重复了
+	path[v]=u;
+    cost[v]=cost[u]+Adj[u][j].cost;
+}else if(dist[u]+Adj[u][j].weight=dist[v]&&(cost[u]+Adj[u][j].cost<cost[v])){
+    cost[v]=cost[u]+Adj[u][j].cost;
+}
+//2、新增了权
+if(isVisited[v]==false&&(dist[u]+Adj[u][j].weight<dist[v])){
+    dist[v]=dist[u]+Adj[u][j].weight;//这个不能用i因为上面重复了
+	path[v]=u;
+    w[v]=w[u]+weight[v];
+}else if(dist[u]+Adj[u][j].weight=dist[v]&&(w[u]+weight[v]<w[v])){
+    w[v]=w[u]+weight[v];
+}
+//3、求条数
+//感觉有点毛病 能求出有两条 这个num记录的是有多少个条路径是相等的 但是如果说有n条相等的路径 其最短路径绝对不止n条
+if(isVisited[v]==false&&(dist[u]+Adj[u][j].weight<dist[v])){
+    dist[v]=dist[u]+Adj[u][j].weight;//这个不能用i因为上面重复了
+	path[v]=u;
+    num[v]=num[u];
+}else if(dist[u]+Adj[u][j].weight=dist[v]){
+    num[v]+=num[u];
 }
 ~~~
 
