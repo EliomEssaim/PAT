@@ -18,6 +18,7 @@ void Dijkstra(int source){
                 minWeight=dist[v];u=v;//segementfault
             }
         }
+        test[0]=u;
         if(u==-1) return;
         visited[u]=true;//≤Óµ„Õ¸¡À
         for(int v=0;v<n;v++){
@@ -42,6 +43,8 @@ void Dijkstra(int source){
 }
 int main(){
     int m,c1,c2;
+    global vector<int> test;
+    test.resize(n);
     scanf("%d%d%d%d",&n,&m,&c1,&c2);
     dist.resize(n);TeamsCnt.resize(n);
     paths.resize(n);TeamsInCity.resize(n);
