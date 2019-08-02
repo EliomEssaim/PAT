@@ -4,7 +4,7 @@
 #include<cmath>
 using namespace std;
 const int MAXV=510,INF=0x3fffffff;
-int G[MAXV][MAXV],dist[MAXV],Cmax,N,Sp,M,choosed=INF;
+int G[MAXV][MAXV],dist[MAXV],Cmax,N,Sp,M,minSend=INF,minBack=INF;
 bool visit[MAXV]={false};
 vector<int> pre[MAXV],tempPath,path,bikes;
 void Dijkstra(int s){
@@ -35,13 +35,28 @@ void Dijkstra(int s){
 void DFS(int vertex){
     tempPath.push_back(vertex);
     if(vertex==0){//不考虑perfect状态
-        int extraORlackBikes=0;
-        for(int i=0;i<(int)tempPath.size();i++){
-            extraORlackBikes+=abs(tempPath[i]-Cmax);//假定路途上的都偏full或lack
+        int need = 0, back = 0,imperfect;
+        for(int i = tempPath.size() - 2; i >= 0; i--) {
+            int id = tempPath[i];
+            imperfect=bikes[id]-Cmax;
+            if(imperfect > 0) {
+                back += imperfect;
+            } else {
+                if(back > (0 - imperfect)) {
+                    back += imperfect;
+                } else {
+                    need += ((0 - imperfect) - back);
+                    back = 0;
+                }
+            }
         }
-        if(extraORlackBikes<choosed) {
-            choosed=extraORlackBikes;
-            path=tempPath;
+        if(need < minSend) {
+            minSend = need;
+            minBack = back;
+            path = tempPath;
+        } else if(need == minSend && back < minBack) {
+            minBack = back;
+            path = tempPath;
         }
         tempPath.pop_back();
         return;
@@ -65,13 +80,12 @@ int main(){
     }
     Dijkstra(0);
     DFS(Sp);
-    int lack;
-    if(bikes[Sp]-5<0) lack=choosed;
-    else lack=0;
-    printf("%d ",lack);
+    printf("%d ",minSend);
     for(int i=(int)path.size()-1;i>=0;i--){
         printf("%d%s",path[i],i==0?" ":"->");
     }
-    printf("%d\n",choosed-lack);
+    printf("%d\n",minBack);
     return 0;
 }
+//题意理解错误：
+//要先送车子到问题城市，回来的图中调整，而不是

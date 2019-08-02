@@ -200,9 +200,16 @@
 	<vector>
 	<algorithm>
 
-1564415103 source:f:\notes\pat\code\a1018.cpp
+1564495360 source:f:\notes\pat\code\a1018.cpp
 	<iostream>
 	<vector>
 	<algorithm>
 	<cmath>
+
+1564757981 source:f:\notes\pat\code\a1087.cpp
+	<iostream>
+	<vector>
+	<algorithm>
+	<map>
+	<string>
 
