@@ -34,6 +34,8 @@
 - iterates**迭代**
 - Connected Component**连通分量**
 - acyclic **无环**
+- one-way**单行道**
+- intersections**十字路口**
 
 ### 树/图类专业名词
 
