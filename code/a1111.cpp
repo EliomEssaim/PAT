@@ -17,7 +17,6 @@ void Dijkstra(int st, int G[MAXV][MAXV]) {
 				u = i; minWeight = dist[i];
 			}
 		}
-
 		if (u == -1) return;
 		visited[u] = true;
 		for (int v = 0; v < n; v++) {
