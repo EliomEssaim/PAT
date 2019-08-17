@@ -1069,6 +1069,7 @@ str.erase(?,?);//删除一个元素的两个写法 删除区间的两种写法
 str.substr(?,?);
 string::npos
 str.find(?);
+str.find(' ',5);//从下标是5的地方开始找
 str.replace(?,?,?)//两种写法
 /*********分割线*****************/    
 getline(cin, str);//获得一行数据 使用之前要用 getchar();把\n吃掉！！！
