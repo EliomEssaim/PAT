@@ -36,6 +36,7 @@
 - acyclic **无环**
 - one-way**单行道**
 - intersections**十字路口**
+- Quadratic**平方**
 
 ### 树/图类专业名词
 
@@ -963,6 +964,7 @@ vector<int> prime(500000, 1);
 for(int i = 2; i * i < 500000; i++)
         for(int j = 2; j * i < 500000; j++)
             prime[j * i] = 0;
+//1不是质数
 ```
 
 
@@ -980,6 +982,22 @@ int lcm(int a,int b)
     return a*b/gcd(a,b);
 }
 ```
+
+## 4.平方探测法
+
+~~~C++
+void insert(int key){
+    int index=key,step=0;
+    for(;step<Msize;step++){
+        index=(key+step*step)%Msize;
+        if(hashTable[index]==0){
+            hashTable[index]=1;
+            cout<<index;return;
+        }
+    }
+    cout<<"-";
+}
+~~~
 
 
 
@@ -1031,7 +1049,7 @@ multiset<int> st;//只排序不去重
 #include<set>
 set<int>  st;
 st.insert(?);
-st.find();//返回值是什么？
+st.find();//返回值是什么？nofound时候返回end()
 st.erase(?,?);//单个元素的两种方法 删除区间的一种方法
 st.size();
 st.clear();
@@ -1068,7 +1086,7 @@ str.insert(?,?);
 str.erase(?,?);//删除一个元素的两个写法 删除区间的两种写法
 str.substr(?,?);
 string::npos
-str.find(?);
+str.find(?);//str.npos
 str.find(' ',5);//从下标是5的地方开始找
 str.replace(?,?,?)//两种写法
 /*********分割线*****************/    
@@ -1100,7 +1118,7 @@ map<char,int>::iterator it=mp.begin();
 it.first=?;
 it.second=?;
 mp.find(?);
-//mp.find(str)!=mp.end() 可以帮助我们判断str有没有出现过
+//mp.find(str)!=mp.end() 可以帮助我们判断str有没有出现过 set的用法类似
 mp.erase(?);//删除单个元素的两种方法？删除区间元素的一个方法
 mp.size();
 mp.clear();
