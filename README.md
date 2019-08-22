@@ -37,6 +37,8 @@
 - one-way**单行道**
 - intersections**十字路口**
 - Quadratic**平方**
+- quota**共享**
+- numerator/denominator**分子/分母**
 
 ### 树/图类专业名词
 
@@ -45,6 +47,11 @@
 - 满二叉树   Full   binary   tree
 - 完全二叉树   Complete   binary   tree
 - 二叉排序树   Binary   sort   tree
+- ​     
+- 
+- 
+- 
+- 
 - 二叉搜索树   Binary   search   tree
 - 前序遍历   Preorder   traversal
 - 中序遍历   Inorder   traversal
@@ -999,6 +1006,16 @@ void insert(int key){
 }
 ~~~
 
+## 5.rank
+
+```C++
+for(int i=1;i<=n;i++){
+    submit[i].rank=i;
+    if(i!=1&&submit[i].score==submit[i-1].score)
+        submit[i].rank=submit[i-1].rank;
+}
+```
+
 
 
 
@@ -1357,6 +1374,8 @@ int main(){
 
 
 
+**&(引用) 可以显著加快运算速度**
+
 ## 函数类
 
 ### memset函数
@@ -1537,16 +1556,6 @@ void BFS(int s){
         将队首元素出队;
         将top的下一层节点中未曾入队的节点全部入队，并设置为已入队;
     }
-}
-~~~
-
-## rank
-
-~~~C++
-for(int i=1;i<=n;i++){
-    submit[i].rank=i;
-    if(i!=1&&submit[i].score==submit[i-1].score)
-        submit[i].rank=submit[i-1].rank;
 }
 ~~~
 
