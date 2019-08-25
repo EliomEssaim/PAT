@@ -47,11 +47,6 @@
 - 满二叉树   Full   binary   tree
 - 完全二叉树   Complete   binary   tree
 - 二叉排序树   Binary   sort   tree
-- ​     
-- 
-- 
-- 
-- 
 - 二叉搜索树   Binary   search   tree
 - 前序遍历   Preorder   traversal
 - 中序遍历   Inorder   traversal
@@ -939,11 +934,9 @@ bool topologicalSort(){
 
 ```C++
 //P进制转换为十进制
-int P2dec(int x,int p)
-{
+int P2dec(int x,int p){
     int product=1,sum=0;
-    while(x>0)
-    {
+    while(x>0){
         sum+=(x%10)*product;
         x/=10;
         product*=p; 
