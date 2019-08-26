@@ -1114,7 +1114,7 @@ map<string, int> mp;
 - unodered_map只映射**不排序**（#include <unordered_map>）**C++11**
 - **vector**可以用来做hash！快很多
 - count(elem) 返回指定元素出现的次数
-- lower_bound() 返回键值>=给定元素的第一个位置
+- lower_bound() 返回键值>=给定元素的第一个位置 找不到返回一个的v.end（）（如果是n位长的数组就是n）
 - upper_bound() 返回键值>给定元素的第一个位置
 
 ~~~C++
@@ -1243,7 +1243,9 @@ mp.insert(pair<string,int>("haha",10));//类型名直接加小括号
 ## #include Algorithm
 
 ~~~C++
-max(x,y);min(x,y);abs(x);//操作对象都是整数abs如果想用浮点数要用math.h下的fabs()
+max(x,y);//输入参数为迭代器的差值的时候 要强制转换成int
+min(x,y);//min同理
+abs(x);//操作对象都是整数abs如果想用浮点数要用math.h下的fabs()
 swap(x,y);
 reverse(it,it2);//左闭右开的将区间的迭代器进行反转，数组可用vector可用string可用
 next_permutation(a,a+3);//给出按字典序的下一个全排列如 123 132 213 231....最后会输出false
@@ -1252,7 +1254,7 @@ fill(a,a+5,3);//对指针范围内（左闭右开），进行赋值
 lower_bound(first,last,val);
 upper_bound(fitst,last,val);//在有序！！数组或者容器中查找第一个值大/小于等于val的元素的指针/迭代器
 //如果想要获得下标可以用指针减去，头指针就是下标了
-
+//找不到返回v.end()
 ~~~
 
 ~~~C++
@@ -1263,7 +1265,14 @@ upper_bound(fitst,last,val);//在有序！！数组或者容器中查找第一�
 
 ~~~
 
+### find函数
 
+```c++
+#include<algorithm>
+待查值的地址=find(数组的起始地址,数组的终止地址+1,待查找的值);
+```
+
+### 
 
 ### sort函数
 
@@ -1284,6 +1293,12 @@ sort(root.begin(),root.end(),cmp)//cmp return的应该是a>b就好了而不是ro
 
 ~~~C++
 isdigit();//判断一个字符（char）的是否是数字
+tolower和toupper函数
+#include <cctype>
+//大小写转换 针对单个字符而言！ 非字母原封不动
+ for(int i=0;i<str.size();i++)
+        str[i]=tolower(str[i]);
+
 ~~~
 
 ## #include numeric 
@@ -1381,13 +1396,6 @@ fill(first,last,val);
 //first为容器的首迭代器，last为容器的末迭代器，val为将要替换的值。
 ```
 
-### find函数
-
-~~~c++
-#include<algorithm>
-待查值的地址=find(数组的起始地址,数组的终止地址+1,待查找的值);
-~~~
-
 ### stoi函数
 
 ~~~c++
@@ -1420,16 +1428,7 @@ float stoi(string str)//将字符串转换为数字
 //sscanf函数也可以做到
 ~~~
 
-### 
 
-### tolower和toupper函数
-
-~~~c++
-#include <cctype>
-//大小写转换 针对单个字符而言！
- for(int i=0;i<str.size();i++)
-        str[i]=tolower(str[i]);
-~~~
 
 ------
 
