@@ -1068,7 +1068,7 @@ count() ;//返回某个值元素的个数
 
 ## string
 
-- sort可用
+- sort可用 增删查换
 - string要先resize()不然不能用？
 
 ~~~c++
@@ -1094,7 +1094,7 @@ cout<<str2<<endl;//输出？                                                    
 string str;
 str.insert(?,?);
 str.erase(?,?);//删除一个元素的两个写法 删除区间的两种写法
-str.substr(?,?);
+str.substr(?,?); s.substr(pos); //截取s中从从pos开始（包括0）到末尾的所有字符的子串，并返回
 string::npos
 str.find(?);//str.npos
 str.find(' ',5);//从下标是5的地方开始找
@@ -1448,7 +1448,11 @@ float stoi(string str)//将字符串转换为数字
 
 最大值可以通过cfloat 文件中取到**DBL_MAX**。
 
-用**0x3fffffffH**来表示**inf**
+用**0x3fffffffH**来表示**inf** 但不可以用来表示float
+
+因为你写float a=0b 0000 0000 0000 0000 0000 0000 0000 0001；
+
+并不是给机器数赋值。而是表示1这个数字所以写多大就有多大。
 
 ### II的优先级小于&&
 
